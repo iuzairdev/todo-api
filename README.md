@@ -15,7 +15,8 @@ demonstrating **containerization**, **Infrastructure automation**, and a fully
 ---
 
 ## 📐 Architecture
-<svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+
+<img width="300" height="144" alt="architecture-diagram" src="https://github.com/user-attachments/assets/4250f9ba-d73a-4bd3-8c47-878d03ce82e9" /><svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#4a5568"/>
@@ -95,7 +96,6 @@ demonstrating **containerization**, **Infrastructure automation**, and a fully
 
 </svg>
 
-![Architecture diagram](docs/architecture-diagram.svg)<img width="300" height="144" alt="architecture-diagram" src="https://github.com/user-attachments/assets/598664a7-08dd-422e-94aa-b2d487f6692e" />
 
 
 **Flow:** Developer pushes code → GitHub triggers a workflow → GitHub Actions connects to AWS EC2 over SSH → pulls the latest code, rebuilds the Docker image, and restarts the container → app is live and publicly reachable.
