@@ -1,22 +1,23 @@
-# 🚀 To-Do API — Dockerized REST API with Automated CI/CD to AWS
+# 🚀 To-Do API — Multi-Container (API + DB) with Automated CI/CD to AWS
 
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
-![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)
+![Docker](https://img.shields.io/badge/Container-Docker%20%7C%20Compose-2496ED?logo=docker&logoColor=white)
+![Database](https://img.shields.io/badge/Database-PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![AWS](https://img.shields.io/badge/Cloud-AWS%20EC2-FF9900?logo=amazonaws&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Runtime-Node.js-339933?logo=nodedotjs&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-A lightweight REST API for managing tasks — built as an end-to-end **DevOps** project
-demonstrating **containerization**, **Infrastructure automation**, and a fully
-**automated CI/CD pipeline** deploying to **AWS Cloud**.
+A production-ready, multi-container REST API for managing tasks. This repository tracks an end-to-end **DevOps** progression demonstrating container orchestration, persistent databases, networking, and fully **automated CI/CD pipelines** deploying to **AWS Cloud**.
 
-> Push to `main` → GitHub Actions builds & deploys automatically → live on AWS EC2 in under a minute. Zero manual steps.
+> **Day 1:** Stateless App + Docker + GitHub Actions + AWS EC2
+> **Day 2:** Multi-Container Setup + PostgreSQL + Docker Compose + Volumes & Networking
 
 ---
 
 ## 📐 Architecture
 
-<img width="300" height="144" alt="architecture-diagram" src="https://github.com/user-attachments/assets/4250f9ba-d73a-4bd3-8c47-878d03ce82e9" /><svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+On every `git push`, the architecture dynamically provisions and manages isolated application and storage tiers within AWS.
+
+<svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#4a5568"/>
@@ -25,174 +26,109 @@ demonstrating **containerization**, **Infrastructure automation**, and a fully
 
   <rect x="0" y="0" width="1000" height="480" fill="#ffffff"/>
 
-  <text x="500" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1a202c">To-Do API — CI/CD Pipeline Architecture</text>
-  <text x="500" y="64" text-anchor="middle" font-size="13" fill="#718096">Push to main → automated build → automated deploy → live on AWS</text>
+  <text x="500" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1a202c">To-Do API — Multi-Container CI/CD Architecture</text>
+  <text x="500" y="64" text-anchor="middle" font-size="13" fill="#718096">Automated build & multi-container orchestration with Docker Compose</text>
 
-  <!-- Step 1: Developer -->
   <g>
-    <rect x="30" y="150" width="150" height="100" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="2"/>
-    <text x="105" y="190" text-anchor="middle" font-size="30">💻</text>
-    <text x="105" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#2c5282">Developer</text>
-    <text x="105" y="238" text-anchor="middle" font-size="11" fill="#4a5568">git push origin main</text>
+    <rect x="20" y="150" width="140" height="100" rx="10" fill="#ebf8ff" stroke="#3182ce" stroke-width="2"/>
+    <text x="90" y="190" text-anchor="middle" font-size="30">💻</text>
+    <text x="90" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#2c5282">Developer</text>
+    <text x="90" y="238" text-anchor="middle" font-size="11" fill="#4a5568">git push</text>
   </g>
 
-  <!-- Arrow 1 -->
-  <line x1="180" y1="200" x2="238" y2="200" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="160" y1="200" x2="208" y2="200" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Step 2: GitHub -->
   <g>
-    <rect x="240" y="150" width="150" height="100" rx="10" fill="#f7fafc" stroke="#2d3748" stroke-width="2"/>
-    <text x="315" y="190" text-anchor="middle" font-size="30">🐙</text>
-    <text x="315" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#1a202c">GitHub</text>
-    <text x="315" y="238" text-anchor="middle" font-size="11" fill="#4a5568">Repo: todo-api</text>
+    <rect x="210" y="150" width="150" height="100" rx="10" fill="#f0fff4" stroke="#38a169" stroke-width="2"/>
+    <text x="285" y="190" text-anchor="middle" font-size="30">⚙️</text>
+    <text x="285" y="220" text-anchor="middle" font-size="14" font-weight="600" fill="#22543d">GitHub Actions</text>
+    <text x="285" y="238" text-anchor="middle" font-size="11" fill="#4a5568">Trigger SSH Deploy</text>
   </g>
 
-  <!-- Arrow 2 -->
-  <line x1="390" y1="200" x2="448" y2="200" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="419" y="190" text-anchor="middle" font-size="10" fill="#718096">triggers</text>
+  <line x1="360" y1="200" x2="418" y2="200" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="389" y="190" text-anchor="middle" font-size="10" fill="#718096">SSH</text>
 
-  <!-- Step 3: GitHub Actions -->
   <g>
-    <rect x="450" y="130" width="170" height="140" rx="10" fill="#f0fff4" stroke="#38a169" stroke-width="2"/>
-    <text x="535" y="168" text-anchor="middle" font-size="30">⚙️</text>
-    <text x="535" y="196" text-anchor="middle" font-size="14" font-weight="600" fill="#22543d">GitHub Actions</text>
-    <text x="535" y="214" text-anchor="middle" font-size="11" fill="#4a5568">1. Checkout code</text>
-    <text x="535" y="230" text-anchor="middle" font-size="11" fill="#4a5568">2. SSH into EC2</text>
-    <text x="535" y="246" text-anchor="middle" font-size="11" fill="#4a5568">3. Run deploy script</text>
+    <rect x="420" y="110" width="550" height="260" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+    <text x="695" y="135" text-anchor="middle" font-size="15" font-weight="700" fill="#7b341e">AWS EC2 Instance (Docker Compose Engine)</text>
+
+    <rect x="445" y="160" width="500" height="190" rx="8" fill="#f7fafc" stroke="#4a5568" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text x="460" y="180" font-size="11" font-weight="bold" fill="#4a5568">🔒 Isolated Bridge Network</text>
+
+    <rect x="460" y="200" width="180" height="120" rx="6" fill="#ebf8ff" stroke="#3182ce" stroke-width="2"/>
+    <text x="550" y="230" text-anchor="middle" font-size="24">🐳</text>
+    <text x="550" y="260" text-anchor="middle" font-size="12" font-weight="bold" fill="#2c5282">Node.js API</text>
+    <text x="550" y="275" text-anchor="middle" font-size="10" fill="#4a5568">Internal Port 3000</text>
+    <text x="550" y="290" text-anchor="middle" font-size="9" fill="#e53e3e">depends_on: db</text>
+
+    <line x1="640" y1="260" x2="730" y2="260" stroke="#2b6cb0" stroke-width="2" stroke-dasharray="2,2"/>
+    
+    <rect x="740" y="200" width="180" height="120" rx="6" fill="#ebf4ff" stroke="#4269e1" stroke-width="2"/>
+    <text x="830" y="230" text-anchor="middle" font-size="24">💾</text>
+    <text x="830" y="260" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a365d">PostgreSQL DB</text>
+    <text x="830" y="275" text-anchor="middle" font-size="10" fill="#4a5568">Internal Port 5432</text>
+    <text x="830" y="295" text-anchor="middle" font-size="9" fill="#2b6cb0">📁 Named Volume Mount</text>
   </g>
 
-  <!-- Arrow 3 -->
-  <line x1="620" y1="200" x2="678" y2="200" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="649" y="190" text-anchor="middle" font-size="10" fill="#718096">SSH</text>
+  <line x1="550" y1="410" x2="550" y2="332" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="610" y="380" text-anchor="middle" font-size="11" fill="#718096">Public HTTP (Port 80->3000)</text>
 
-  <!-- Step 4: AWS EC2 -->
   <g>
-    <rect x="680" y="110" width="290" height="220" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
-    <text x="825" y="138" text-anchor="middle" font-size="14" font-weight="700" fill="#7b341e">AWS EC2 Instance</text>
-
-    <!-- Docker container inside EC2 -->
-    <rect x="710" y="155" width="230" height="140" rx="8" fill="#ebf8ff" stroke="#3182ce" stroke-width="2" stroke-dasharray="4,3"/>
-    <text x="825" y="178" text-anchor="middle" font-size="12" font-weight="600" fill="#2c5282">🐳 Docker Container</text>
-
-    <rect x="730" y="192" width="190" height="80" rx="6" fill="#ffffff" stroke="#a0aec0" stroke-width="1.5"/>
-    <text x="825" y="216" text-anchor="middle" font-size="11" font-weight="600" fill="#1a202c">Node.js + Express</text>
-    <text x="825" y="234" text-anchor="middle" font-size="10" fill="#4a5568">To-Do API</text>
-    <text x="825" y="250" text-anchor="middle" font-size="10" fill="#4a5568">Port 3000</text>
-
-    <text x="825" y="312" text-anchor="middle" font-size="10" fill="#7b341e">git pull → docker build → docker run</text>
+    <rect x="460" y="410" width="180" height="50" rx="8" fill="#faf5ff" stroke="#805ad5" stroke-width="2"/>
+    <text x="550" y="440" text-anchor="middle" font-size="13" font-weight="600" fill="#44337a">🌐 Public Internet Clients</text>
   </g>
-
-  <!-- Arrow down to user -->
-  <line x1="825" y1="330" x2="825" y2="380" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)"/>
-  <text x="880" y="358" text-anchor="middle" font-size="10" fill="#718096">HTTP:3000</text>
-
-  <!-- Step 5: End user -->
-  <g>
-    <rect x="750" y="385" width="150" height="80" rx="10" fill="#faf5ff" stroke="#805ad5" stroke-width="2"/>
-    <text x="825" y="415" text-anchor="middle" font-size="26">🌐</text>
-    <text x="825" y="440" text-anchor="middle" font-size="13" font-weight="600" fill="#44337a">Public Internet</text>
-    <text x="825" y="456" text-anchor="middle" font-size="10" fill="#4a5568">curl /health → 200 OK</text>
-  </g>
-
 </svg>
-
-
-
-**Flow:** Developer pushes code → GitHub triggers a workflow → GitHub Actions connects to AWS EC2 over SSH → pulls the latest code, rebuilds the Docker image, and restarts the container → app is live and publicly reachable.
 
 ---
 
 ## 🧰 Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Application** | Node.js, Express.js |
-| **Containerization** | Docker |
-| **CI/CD Automation** | GitHub Actions |
-| **Cloud Infrastructure** | AWS EC2 (Amazon Linux 2023) |
-| **Version Control** | Git & GitHub |
-| **Monitoring** | UptimeRobot (uptime checks on `/health`) |
+| Layer | Technology | Key Implementation Details |
+|---|---|---|
+| **Application Runtime** | Node.js / Express.js | Fixed environment loading, input validation |
+| **Database Container** | PostgreSQL | Multi-container link, custom init schemas |
+| **Containerization** | Docker & Docker Compose | Multi-stage optimization, healthcheck synchronization |
+| **CI/CD Automation** | GitHub Actions | Context-aware actions, automated composition reload |
+| **Cloud Infrastructure** | AWS EC2 | Custom security groups, network path constraints |
+| **Data Persistence** | Docker Named Volumes | Decoupled local file structure mappings |
 
 ---
 
-## ✨ Features
+## ✨ Features Added / Maintained
 
-- ✅ RESTful API with proper HTTP status codes and input validation
-- ✅ Containerized with a production-conscious Dockerfile (non-root user, healthcheck, optimized layer caching)
-- ✅ Fully automated **CI/CD pipeline** — no manual SSH deploys
-- ✅ Secrets managed securely via **GitHub Actions Secrets** (never hardcoded)
-- ✅ Deployed and running live on **AWS Cloud infrastructure**
-- ✅ Health check endpoint for uptime monitoring and orchestration readiness
+- ✅ **Multi-Container Orchestration:** Unified provisioning of API server and database container via `docker-compose.yml`.
+- ✅ **State Persistence:** Persistent database storage using **Docker Named Volumes** — data remains intact across rebuilds and deployments.
+- ✅ **Network Isolation:** Built-in bridge network prevents public external lookups directly hitting the database engine port (`5432`). Only the API container can connect.
+- ✅ **Startup Order Control:** Uses dependencies combined with health check parameters (`pg_isready`) preventing the API container from dropping requests prior to full database compilation.
+- ✅ **Production Caching:** High-efficiency, multi-stage layout builds to decrease final production target size.
 
 ---
 
 ## 📡 API Endpoints
 
+All data mutations are persistently tracked on the PostgreSQL runtime volume.
+
 | Method | Endpoint | Description |
 |--------|-----------|-------------|
-| `GET` | `/health` | Health check |
-| `GET` | `/tasks` | List all tasks |
-| `POST` | `/tasks` | Create a task — `{ "title": "..." }` |
-| `PATCH` | `/tasks/:id/complete` | Mark a task as completed |
-| `DELETE` | `/tasks/:id` | Delete a task |
+| `GET` | `/health` | Core system & DB link availability checks |
+| `GET` | `/tasks` | Retrieves all relational database task listings |
+| `POST` | `/tasks` | Appends a single structured entry to the DB |
+| `PATCH` | `/tasks/:id/complete` | Updates completeness fields |
+| `DELETE` | `/tasks/:id` | Drop specified entry id from table |
 
 ---
 
-## 🖥️ Run Locally
+## 🖥️ Local Execution
 
-```bash
-npm install
-npm start
-```
-Server runs on `http://localhost:3000`
+### Prerequisites
+Ensure both **Docker** and **Docker Compose** are active on your system workspace.
 
-## 🐳 Run with Docker
-
-```bash
-docker build -t todo-api .
-docker run -p 3000:3000 todo-api
-```
-
-## ☁️ Deployment
-
-This project auto-deploys to **AWS EC2** via **GitHub Actions** on every push to `main`.
-See [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) for the full pipeline definition.
-
-**Pipeline steps:**
-1. Checkout latest code
-2. SSH into AWS EC2 instance
-3. Pull latest changes from `main`
-4. Rebuild Docker image
-5. Restart container with zero-downtime restart policy (`--restart unless-stopped`)
-
----
-
-## 📈 What This Project Demonstrates
-
-Built to showcase practical, job-ready **DevOps Engineering** skills:
-- Container orchestration fundamentals with **Docker**
-- **CI/CD pipeline** design and implementation with **GitHub Actions**
-- **Cloud infrastructure** provisioning and deployment on **AWS**
-- Secure secrets management and SSH-based deployment automation
-- Production practices: health checks, restart policies, and uptime monitoring
-
----
-
-## 🗺️ Roadmap
-
-- [ ] Add automated tests to the pipeline (CI test stage before deploy)
-- [ ] Migrate to Infrastructure as Code with **Terraform**
-- [ ] Add a persistent database (PostgreSQL/DynamoDB)
-- [ ] Set up centralized logging and metrics (CloudWatch / Grafana)
-- [ ] Add HTTPS via a reverse proxy (Nginx + Let's Encrypt)
-
----
-
-## 📄 License
-
-MIT
-
----
-
-**Tags:** `devops` `cicd` `docker` `aws` `github-actions` `cloud-computing` `nodejs` `automation` `infrastructure-as-code` `rest-api` `containerization` `sre`
-
+### 1. Configure Environment Variables
+Create a `.env` file in the root workspace folder:
+```env
+PORT=3000
+DB_HOST=db
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_secure_password
+DB_NAME=todo_db
