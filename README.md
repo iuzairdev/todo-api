@@ -14,6 +14,8 @@ A production-ready, multi-container REST API for managing tasks. This repository
 ---
 
 ## 📐 Architecture
+<img width="4000" height="1920" alt="architecture-diagram" src="https://github.com/user-attachments/assets/38108b01-7e7e-4906-8877-73d5e611427c" />
+
 
 On every `git push`, the architecture dynamically provisions and manages isolated application and storage tiers within AWS.
 
