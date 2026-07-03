@@ -15,8 +15,10 @@ A production-ready, multi-container REST API for managing tasks. This repository
 
 ---
 
+
+<img width="900" height="348" alt="Untitled" src="https://github.com/user-attachments/assets/8eb0272a-4e91-45e3-9a22-111ed8e32d5e" /><?xml version="1.0" encoding="utf-8"?>
+
 ## 📐 Architecture & CI/CD Pipeline
-<!-- <img width="300" height="136" alt="Untitled" src="https://github.com/user-attachments/assets/8eb0272a-4e91-45e3-9a22-111ed8e32d5e" /><?xml version="1.0" encoding="utf-8"?> -->
 <svg viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
   <defs>
     <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="120%">
