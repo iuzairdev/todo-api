@@ -32,7 +32,8 @@ A production-ready, multi-container REST API for managing tasks. This repository
     </marker>
   </defs>
   <rect width="1100" height="500" fill="#ffffff"/>
-  <text x="550" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1a202c" style="white-space: pre;">To-Do API — CI/CD Pipeline Architecture with Automated Testing</text>
+  <text x="550" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1a202c" style="white-space: pre;">
+    To-Do API — CI/CD Pipeline Architecture with Automated Testing</text>
   <text x="550" y="65" text-anchor="middle" font-size="13" fill="#718096" font-weight="500" style="white-space: pre;">Push to main → Automated Test → Automated Deploy → Live on AWS</text>
   <g filter="url(#drop-shadow)">
     <rect x="30" y="150" width="160" height="110" rx="8" fill="#ebf8ff" stroke="#3182ce" stroke-width="2"/>
