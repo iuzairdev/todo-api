@@ -12,6 +12,7 @@ A production-ready, multi-container REST API for managing tasks. This repository
 > **Day 1:** Stateless App + Docker + GitHub Actions + AWS EC2  
 > **Day 2:** Multi-Container Setup + PostgreSQL + Docker Compose + Volumes & Networking  
 > **Day 3:** Modular Architecture + Automated Test Suite (10 Endpoints) + CI/CD Quality Gates (`test` → `deploy`)
+> **Day 4:** Infrastructure as Code with Terraform
 
 ---
 
