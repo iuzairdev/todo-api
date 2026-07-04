@@ -15,6 +15,7 @@ A production-ready, multi-container REST API for managing tasks. This repository
 
 ---
 
+> Infrastructure for this project is managed as code: see [todo-api-infra](https://github.com/iuzairdev/todo-api-infra)
 
 <img width="900" height="348" alt="Untitled" src="https://github.com/user-attachments/assets/8eb0272a-4e91-45e3-9a22-111ed8e32d5e" /><?xml version="1.0" encoding="utf-8"?>
 
