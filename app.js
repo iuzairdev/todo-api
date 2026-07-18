@@ -1,7 +1,9 @@
 const express = require('express');
+const morgan = require('morgan');
 const { pool } = require('./db');
 
 const app = express();
+app.use(morgan('combined'));
 app.use(express.json());
 
 app.get('/health', async (req, res) => {
